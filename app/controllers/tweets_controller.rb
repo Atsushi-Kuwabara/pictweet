@@ -18,6 +18,10 @@ class TweetsController < ApplicationController
     tweet.destroy if tweet.user_id == current_user.id
   end
 
+  def edit
+    @tweet = Tweet.find(params{:id})
+  end
+
   private
   def tweet_params
     params.permit(:image, :text)
