@@ -1,24 +1,41 @@
-# README
+# 概要
+写真投稿型SNS(Rails練習用アプリケーション)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# DB設計
 
-Things you may want to cover:
+## users Table
+|Column|Type|Option|
+|------|----|------|
+|id|integer|null:alse|
+|nickname|string|null:false|
+|email|string|null:false|
+|password|string|null:false|
 
-* Ruby version
+### Association
+- has_many :tweets
+- has_many :comments
 
-* System dependencies
+## tweets Table
+|Column|Type|Option|
+|------|----|------|
+|id|integer|null:false|
+|text|text||
+|image|text||
+|created_at|datetime|null:false|
 
-* Configuration
+### Association
+- belongs_to :user
+- has_many :comments
 
-* Database creation
+## comments Table
+|Column|Type|Option|
+|------|----|------|
+|id|integer|null:false|
+|user_id|integer|null:false, foreign_key: true|
+|tweet_id|integer|null:false, foreign_key: true|
+|text|text|null:false|
+|created_at|datetime|null:false|
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :tweet
+- belongs_to :user
